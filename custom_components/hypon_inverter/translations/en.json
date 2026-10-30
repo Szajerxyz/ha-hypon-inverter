@@ -1,0 +1,68 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Hypon inverter",
+        "description": "Enter the address of the RS485-to-Ethernet converter (Waveshare in Modbus TCP <-> RTU mode).",
+        "data": {
+          "name": "Inverter name",
+          "host": "Converter IP address",
+          "port": "Port",
+          "slave": "Modbus device ID (slave)",
+          "scan_interval": "Polling interval (s)"
+        },
+        "data_description": {
+          "slave": "Inverter address on the RS485 bus (set in the inverter menu, 1-16).",
+          "scan_interval": "Default 10 s. The bus is shared with the SRNE inverter - do not set a too short interval."
+        }
+      },
+      "no_response": {
+        "title": "Inverter does not respond",
+        "description": "The converter responds, but the inverter does not. An on-grid inverter is off without sunlight (e.g. at night). If the slave address is correct, you can add the integration now - entities will update when the inverter wakes up."
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the converter"
+    },
+    "abort": {
+      "already_configured": "This inverter is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "scan_interval": "Polling interval (s)",
+          "timeout": "Response timeout (s)",
+          "retries": "Retries",
+          "lock_minutes": "Unlock time (minutes)"
+        },
+        "data_description": {
+          "timeout": "Per request (default 3 s).",
+          "retries": "How many times to repeat an unanswered request (default 2). At night the integration sends only one request per minute without retries.",
+          "lock_minutes": "After this time the settings lock again (default 10)."
+        }
+      }
+    }
+  },
+  "services": {
+    "read_registers": {
+      "name": "Read registers",
+      "description": "Reads a range of inverter registers (diagnostics). The result is shown in Developer tools → Actions.",
+      "fields": {
+        "start": {
+          "name": "Start address",
+          "description": "Decimal (30100) or hexadecimal (0x7594)."
+        },
+        "count": {
+          "name": "Number of registers",
+          "description": "1-125."
+        },
+        "config_entry_id": {
+          "name": "Inverter",
+          "description": "Required only with several inverters."
+        }
+      }
+    }
+  }
+}

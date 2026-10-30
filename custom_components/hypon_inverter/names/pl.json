@@ -1,0 +1,275 @@
+{
+  "prefix": "Hypon",
+  "groups": {
+    "info": "Informacje",
+    "grid": "Sieć i wyjście",
+    "pv": "PV",
+    "energy": "Energia",
+    "power_control": "Sterowanie mocą"
+  },
+  "common": {
+    "unknown": "Nieznany",
+    "none": "Brak"
+  },
+  "entities": {
+    "restart": "Restart falownika",
+    "settings_lock": "Blokada ustawień",
+    "serial_number": "Numer seryjny (SN)",
+    "model_name": "Model",
+    "manufacturer_name": "Producent",
+    "firmware_pn": "Numer części oprogramowania",
+    "hardware_version": "Wersja sprzętowa",
+    "software_version": "Wersja oprogramowania",
+    "protocol_version": "Wersja protokołu Modbus",
+    "parameter_version": "Wersja parametrów",
+    "device_type": "Typ urządzenia (kod)",
+    "grid_type": "Typ sieci (kod)",
+    "rated_power": "Moc znamionowa",
+    "max_apparent_power": "Maks. moc pozorna",
+    "mppt_count": "Liczba MPPT",
+    "grid_standard": "Norma sieci",
+    "machine_state": "Stan falownika",
+    "operating_substate": "Tryb pracy (podstan)",
+    "waiting_time": "Czas oczekiwania na połączenie",
+    "operating_hours_total": "Całkowity czas pracy",
+    "fault_codes": "Kod usterki",
+    "fault_description": "Opis usterki",
+    "fault_active": "Usterka falownika",
+    "warning_codes": "Kod ostrzeżenia",
+    "warning_description": "Opis ostrzeżenia",
+    "warning_active": "Ostrzeżenie falownika",
+    "output_active_power": "Moc czynna wyjściowa",
+    "output_apparent_power": "Moc pozorna wyjściowa",
+    "output_reactive_power": "Moc bierna wyjściowa",
+    "output_power_factor": "Współczynnik mocy",
+    "reactive_direction": "Charakter mocy biernej",
+    "grid_l1_voltage": "Sieć L1 napięcie",
+    "grid_l2_voltage": "Sieć L2 napięcie",
+    "grid_l3_voltage": "Sieć L3 napięcie",
+    "grid_l1_current": "Sieć L1 prąd",
+    "grid_l2_current": "Sieć L2 prąd",
+    "grid_l3_current": "Sieć L3 prąd",
+    "grid_l1_l2_voltage": "Sieć napięcie L1-L2",
+    "grid_l2_l3_voltage": "Sieć napięcie L2-L3",
+    "grid_l3_l1_voltage": "Sieć napięcie L3-L1",
+    "grid_frequency": "Sieć częstotliwość",
+    "pv1_voltage": "PV1 napięcie",
+    "pv1_current": "PV1 prąd",
+    "pv1_power": "PV1 moc",
+    "pv2_voltage": "PV2 napięcie",
+    "pv2_current": "PV2 prąd",
+    "pv2_power": "PV2 moc",
+    "pv_power_total": "PV moc suma",
+    "energy_today": "Dzisiejsza produkcja",
+    "energy_total": "Całkowita produkcja",
+    "power_increase_rate": "Szybkość wzrostu mocy",
+    "power_decrease_rate": "Szybkość spadku mocy",
+    "power_control_mode": "Tryb sterowania mocą czynną",
+    "fixed_active_power": "Zadana moc czynna",
+    "meter_limit_power": "Limit mocy z licznikiem",
+    "meter_type": "Typ licznika",
+    "inverter_run": "Praca falownika (start/stop)"
+  },
+  "options": {
+    "machine_state": {
+      "waiting": "Oczekiwanie",
+      "normal": "Praca",
+      "fault": "Usterka",
+      "offline": "Wyłączony (brak PV)"
+    },
+    "operating_substate": {
+      "none": "Brak",
+      "grid_tied": "Praca z siecią",
+      "backup": "Zasilanie awaryjne"
+    },
+    "reactive_direction": {
+      "lag": "Indukcyjny (opóźniający)",
+      "lead": "Pojemnościowy (wyprzedzający)"
+    },
+    "power_control_mode": {
+      "not_used": "Nieużywany",
+      "fixed_active_power": "Stała moc czynna",
+      "dred": "DRED",
+      "meter": "Licznik",
+      "plant_control": "Sterowanie z elektrowni"
+    },
+    "meter_type": {
+      "sdm230": "SDM230 (1-fazowy)",
+      "sdm630": "SDM630 (3-fazowy)"
+    },
+    "grid_standard": {
+      "std_1": "AU AS/NZS 4777.2:2015 (Australia)",
+      "std_2": "NZ AS/NZS 4777.2:2015 (Nowa Zelandia)",
+      "std_3": "CN NB/T 32004:2018 (Chiny)",
+      "std_4": "EN 50549-1:2019 (Europa / globalnie)",
+      "std_5": "NL EN 50549-1:2019 (Holandia)",
+      "std_6": "UK G98-1 (Wielka Brytania)",
+      "std_7": "UK G99-1 (Wielka Brytania)",
+      "std_8": "DE VDE-AR-N 4105:2018 (Niemcy)",
+      "std_9": "BR ABNT NBR 16149:2013 (Brazylia)",
+      "std_10": "Mexico (Meksyk)",
+      "std_11": "CN GB/T 37408:2019 (Chiny)",
+      "std_12": "EN 50549-2:2019 (globalnie)",
+      "std_13": "IEC 61727 (globalnie)",
+      "std_14": "PL EN 50549-1:2019 (Polska)",
+      "std_15": "VN IEC 61727:2004 (Wietnam)",
+      "std_16": "LK IEC 61727:2004 (Sri Lanka)",
+      "std_17": "IT CEI 0-21:2019 (Włochy)",
+      "std_18": "MA IEC 61727:2004 (Maroko)",
+      "std_19": "AR IEC 61727:2004 (Argentyna)",
+      "std_20": "IT CEI 0-21:2019 ARetti (Włochy)",
+      "std_21": "Italy 03 (Włochy)",
+      "std_22": "ZA NRS 097-2-1:2017 (RPA)",
+      "std_23": "BE C10/11:2019 (Belgia)",
+      "std_24": "DK1 EN 50549-1:2019 (Dania (zach.))",
+      "std_25": "DK2 EN 50549-1:2019 (Dania (wsch.))",
+      "std_26": "IE EN 50549-1:2019 (Irlandia)",
+      "std_27": "CL IEC 61727:2004 (Chile)",
+      "std_28": "RO EN 50549-1:2019 (Rumunia)",
+      "std_29": "HU EN 50549-1:2019 (Węgry)",
+      "std_30": "UL 1741:2010 (Ameryka Płn.)",
+      "std_31": "AU A AS/NZS 4777.2:2020 (Australia)",
+      "std_32": "AU B AS/NZS 4777.2:2020 (Australia)",
+      "std_33": "AU C AS/NZS 4777.2:2020 (Australia)",
+      "std_34": "NZ 20 AS/NZS 4777.2:2020 (Nowa Zelandia)",
+      "std_35": "IT CEI 0-16:2019 (Włochy)",
+      "std_36": "ES UNE 206007-1:2013 (Hiszpania)"
+    }
+  },
+  "faults": {
+    "1": {
+      "title": "Błąd mikrokontrolera (MCU)"
+    },
+    "2": {
+      "title": "Błąd czujnika prądu"
+    },
+    "3": {
+      "title": "Błąd układu różnicowoprądowego (GFCI)"
+    },
+    "4": {
+      "title": "Błąd przekaźnika"
+    },
+    "5": {
+      "title": "Zbyt wysokie napięcie PV"
+    },
+    "6": {
+      "title": "Niska rezystancja izolacji (ISO)"
+    },
+    "7": {
+      "title": "Prąd upływu (GFCI)"
+    },
+    "8": {
+      "title": "Przegrzanie"
+    },
+    "9": {
+      "title": "Brak sieci"
+    },
+    "10": {
+      "title": "Napięcie sieci poza zakresem"
+    },
+    "11": {
+      "title": "Częstotliwość sieci poza zakresem"
+    },
+    "12": {
+      "title": "Zbyt duża składowa stała prądu (DCI)"
+    },
+    "13": {
+      "title": "Błąd pamięci EEPROM"
+    },
+    "14": {
+      "title": "Błąd komunikacji między procesorami"
+    },
+    "15": {
+      "title": "Zbyt wysokie napięcie szyny DC"
+    },
+    "16": {
+      "title": "Zbyt niskie napięcie szyny DC"
+    },
+    "17": {
+      "title": "Błąd DRM S9"
+    },
+    "18": {
+      "title": "Błąd DRM S0"
+    },
+    "19": {
+      "title": "Brak połączenia PE"
+    },
+    "20": {
+      "title": "Asymetria napięcia szyny DC"
+    },
+    "21": {
+      "title": "Brak komunikacji z BMS"
+    },
+    "22": {
+      "title": "Przekładnik prądowy (CT) niepodłączony"
+    },
+    "23": {
+      "title": "Odwrotnie podłączony przekładnik (CT)"
+    },
+    "24": {
+      "title": "Bateria niepodłączona"
+    },
+    "25": {
+      "title": "Przepięcie na wyjściu awaryjnym (backup)"
+    }
+  },
+  "warnings": {
+    "1": {
+      "title": "Przetężenie PV1"
+    },
+    "2": {
+      "title": "Przetężenie PV2"
+    },
+    "3": {
+      "title": "Przetężenie PV3"
+    },
+    "4": {
+      "title": "Przetężenie PV4"
+    },
+    "5": {
+      "title": "Zbyt niskie napięcie PV1"
+    },
+    "6": {
+      "title": "Zbyt niskie napięcie PV2"
+    },
+    "7": {
+      "title": "Zbyt niskie napięcie PV3"
+    },
+    "8": {
+      "title": "Zbyt niskie napięcie PV4"
+    },
+    "9": {
+      "title": "Zbyt wysokie napięcie szyny DC"
+    },
+    "10": {
+      "title": "Zbyt niskie napięcie szyny DC"
+    },
+    "11": {
+      "title": "Przetężenie falownika"
+    },
+    "12": {
+      "title": "Rezystancja izolacji (ISO)"
+    },
+    "13": {
+      "title": "Szczytowe przepięcie sieci"
+    },
+    "14": {
+      "title": "Aktualizacja oprogramowania"
+    },
+    "15": {
+      "title": "Brak połączenia PE"
+    },
+    "16": {
+      "title": "Niezgodność pomiarów napięcia sieci"
+    },
+    "17": {
+      "title": "Nieprawidłowa praca wentylatora"
+    },
+    "18": {
+      "title": "Przeciążenie wyjścia awaryjnego (backup)"
+    },
+    "19": {
+      "title": "Uszkodzenie ogranicznika przepięć (SPD)"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Falownik Hypon",
+        "description": "Podaj adres konwertera RS485 na Ethernet (Waveshare w trybie Modbus TCP <-> RTU).",
+        "data": {
+          "name": "Nazwa falownika",
+          "host": "Adres IP konwertera",
+          "port": "Port",
+          "slave": "ID urządzenia Modbus (slave)",
+          "scan_interval": "Interwał odczytu (s)"
+        },
+        "data_description": {
+          "slave": "Adres falownika na magistrali RS485 (ustawiany w menu falownika, 1-16).",
+          "scan_interval": "Domyślnie 10 s. Magistrala jest wspólna z falownikiem SRNE - nie ustawiaj zbyt krótkiego interwału."
+        }
+      },
+      "no_response": {
+        "title": "Falownik nie odpowiada",
+        "description": "Konwerter odpowiada, ale falownik nie. Falownik on-grid bez słońca jest wyłączony (np. w nocy). Jeśli adres slave jest poprawny, możesz dodać integrację teraz - encje zaczną się aktualizować, gdy falownik się włączy."
+      }
+    },
+    "error": {
+      "cannot_connect": "Nie można połączyć się z konwerterem"
+    },
+    "abort": {
+      "already_configured": "Ten falownik jest już skonfigurowany"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "scan_interval": "Interwał odczytu (s)",
+          "timeout": "Czas oczekiwania na odpowiedź (s)",
+          "retries": "Liczba ponowień",
+          "lock_minutes": "Czas odblokowania (minuty)"
+        },
+        "data_description": {
+          "timeout": "Na jedno zapytanie (domyślnie 3 s).",
+          "retries": "Ile razy powtórzyć zapytanie bez odpowiedzi (domyślnie 2). W nocy integracja i tak wysyła tylko jedno zapytanie na minutę, bez ponowień.",
+          "lock_minutes": "Po tym czasie ustawienia blokują się ponownie (domyślnie 10)."
+        }
+      }
+    }
+  },
+  "services": {
+    "read_registers": {
+      "name": "Odczyt rejestrów",
+      "description": "Odczytuje zakres rejestrów falownika (diagnostyka). Wynik widać w Narzędziach deweloperskich → Akcje.",
+      "fields": {
+        "start": {
+          "name": "Adres początkowy",
+          "description": "Dziesiętnie (30100) lub szesnastkowo (0x7594)."
+        },
+        "count": {
+          "name": "Liczba rejestrów",
+          "description": "1-125."
+        },
+        "config_entry_id": {
+          "name": "Falownik",
+          "description": "Wymagane tylko przy kilku falownikach."
+        }
+      }
+    }
+  }
+}

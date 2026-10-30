@@ -1,0 +1,17 @@
+read_registers:
+  fields:
+    start:
+      required: true
+      example: "30100"
+      selector:
+        text:
+    count:
+      default: 16
+      selector:
+        number:
+          min: 1
+          max: 125
+    config_entry_id:
+      selector:
+        config_entry:
+          integration: hypon_inverter

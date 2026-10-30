@@ -1,0 +1,447 @@
+{
+  "_comment": "Entity names (reference language). 'id' = English entity_id suffix (entity_id = <domain>.hypon_<id>). To translate: copy this file to <language-code>.json (e.g. de.json), keep the keys, translate only the values; 'id' is only needed in en.json. Language = Home Assistant system language; fallback = en.",
+  "prefix": "Hypon",
+  "groups": {
+    "info": "Information",
+    "grid": "Grid and output",
+    "pv": "PV",
+    "energy": "Energy",
+    "power_control": "Power control"
+  },
+  "common": {
+    "unknown": "Unknown",
+    "none": "None"
+  },
+  "entities": {
+    "restart": {
+      "id": "inverter_restart",
+      "name": "Inverter restart"
+    },
+    "settings_lock": {
+      "id": "settings_lock",
+      "name": "Settings lock"
+    },
+    "serial_number": {
+      "id": "serial_number",
+      "name": "Serial number"
+    },
+    "model_name": {
+      "id": "model_name",
+      "name": "Model"
+    },
+    "manufacturer_name": {
+      "id": "manufacturer",
+      "name": "Manufacturer"
+    },
+    "firmware_pn": {
+      "id": "firmware_part_number",
+      "name": "Firmware part number"
+    },
+    "hardware_version": {
+      "id": "hardware_version",
+      "name": "Hardware version"
+    },
+    "software_version": {
+      "id": "software_version",
+      "name": "Software version"
+    },
+    "protocol_version": {
+      "id": "modbus_protocol_version",
+      "name": "Modbus protocol version"
+    },
+    "parameter_version": {
+      "id": "parameter_version",
+      "name": "Parameter version"
+    },
+    "device_type": {
+      "id": "device_type_code",
+      "name": "Device type code"
+    },
+    "grid_type": {
+      "id": "grid_type_code",
+      "name": "Grid type code"
+    },
+    "rated_power": {
+      "id": "rated_power",
+      "name": "Rated power"
+    },
+    "max_apparent_power": {
+      "id": "max_apparent_power",
+      "name": "Max apparent power"
+    },
+    "mppt_count": {
+      "id": "mppt_count",
+      "name": "Number of MPPT"
+    },
+    "grid_standard": {
+      "id": "grid_standard",
+      "name": "Grid standard"
+    },
+    "machine_state": {
+      "id": "machine_state",
+      "name": "Machine state"
+    },
+    "operating_substate": {
+      "id": "operating_substate",
+      "name": "Operating substate"
+    },
+    "waiting_time": {
+      "id": "grid_waiting_time",
+      "name": "Grid connection waiting time"
+    },
+    "operating_hours_total": {
+      "id": "operating_hours_total",
+      "name": "Total operating hours"
+    },
+    "fault_codes": {
+      "id": "fault_codes",
+      "name": "Fault code"
+    },
+    "fault_description": {
+      "id": "fault_description",
+      "name": "Fault description"
+    },
+    "fault_active": {
+      "id": "fault_active",
+      "name": "Fault active"
+    },
+    "warning_codes": {
+      "id": "warning_codes",
+      "name": "Warning code"
+    },
+    "warning_description": {
+      "id": "warning_description",
+      "name": "Warning description"
+    },
+    "warning_active": {
+      "id": "warning_active",
+      "name": "Warning active"
+    },
+    "output_active_power": {
+      "id": "inverter_output_active_power",
+      "name": "Inverter output active power"
+    },
+    "output_apparent_power": {
+      "id": "inverter_output_apparent_power",
+      "name": "Inverter output apparent power"
+    },
+    "output_reactive_power": {
+      "id": "inverter_output_reactive_power",
+      "name": "Inverter output reactive power"
+    },
+    "output_power_factor": {
+      "id": "inverter_output_power_factor",
+      "name": "Inverter output power factor"
+    },
+    "reactive_direction": {
+      "id": "reactive_power_direction",
+      "name": "Reactive power direction"
+    },
+    "grid_l1_voltage": {
+      "id": "grid_l1_voltage",
+      "name": "Grid L1 voltage"
+    },
+    "grid_l2_voltage": {
+      "id": "grid_l2_voltage",
+      "name": "Grid L2 voltage"
+    },
+    "grid_l3_voltage": {
+      "id": "grid_l3_voltage",
+      "name": "Grid L3 voltage"
+    },
+    "grid_l1_current": {
+      "id": "grid_l1_current",
+      "name": "Grid L1 current"
+    },
+    "grid_l2_current": {
+      "id": "grid_l2_current",
+      "name": "Grid L2 current"
+    },
+    "grid_l3_current": {
+      "id": "grid_l3_current",
+      "name": "Grid L3 current"
+    },
+    "grid_l1_l2_voltage": {
+      "id": "grid_l1_l2_voltage",
+      "name": "Grid L1-L2 voltage"
+    },
+    "grid_l2_l3_voltage": {
+      "id": "grid_l2_l3_voltage",
+      "name": "Grid L2-L3 voltage"
+    },
+    "grid_l3_l1_voltage": {
+      "id": "grid_l3_l1_voltage",
+      "name": "Grid L3-L1 voltage"
+    },
+    "grid_frequency": {
+      "id": "grid_frequency",
+      "name": "Grid frequency"
+    },
+    "pv1_voltage": {
+      "id": "pv1_voltage",
+      "name": "PV1 voltage"
+    },
+    "pv1_current": {
+      "id": "pv1_current",
+      "name": "PV1 current"
+    },
+    "pv1_power": {
+      "id": "pv1_power",
+      "name": "PV1 power"
+    },
+    "pv2_voltage": {
+      "id": "pv2_voltage",
+      "name": "PV2 voltage"
+    },
+    "pv2_current": {
+      "id": "pv2_current",
+      "name": "PV2 current"
+    },
+    "pv2_power": {
+      "id": "pv2_power",
+      "name": "PV2 power"
+    },
+    "pv_power_total": {
+      "id": "pv_total_power",
+      "name": "PV total power"
+    },
+    "energy_today": {
+      "id": "pv_generation_today",
+      "name": "PV generation today"
+    },
+    "energy_total": {
+      "id": "pv_generation_total",
+      "name": "PV generation total"
+    },
+    "power_increase_rate": {
+      "id": "active_power_increase_rate",
+      "name": "Active power increase rate"
+    },
+    "power_decrease_rate": {
+      "id": "active_power_decrease_rate",
+      "name": "Active power decrease rate"
+    },
+    "power_control_mode": {
+      "id": "active_power_control_mode",
+      "name": "Active power control mode"
+    },
+    "fixed_active_power": {
+      "id": "fixed_active_power",
+      "name": "Fixed active power"
+    },
+    "meter_limit_power": {
+      "id": "meter_limit_power",
+      "name": "Meter limit power"
+    },
+    "meter_type": {
+      "id": "meter_type",
+      "name": "Meter type"
+    },
+    "inverter_run": {
+      "id": "inverter_run",
+      "name": "Inverter run (start/stop)"
+    }
+  },
+  "options": {
+    "machine_state": {
+      "waiting": "Waiting",
+      "normal": "Normal",
+      "fault": "Fault",
+      "offline": "Off (no PV)"
+    },
+    "operating_substate": {
+      "none": "None",
+      "grid_tied": "Grid-tied",
+      "backup": "Backup"
+    },
+    "reactive_direction": {
+      "lag": "Lagging (inductive)",
+      "lead": "Leading (capacitive)"
+    },
+    "power_control_mode": {
+      "not_used": "Not used",
+      "fixed_active_power": "Fixed active power",
+      "dred": "DRED",
+      "meter": "Meter",
+      "plant_control": "Plant control"
+    },
+    "meter_type": {
+      "sdm230": "SDM230 (1-phase)",
+      "sdm630": "SDM630 (3-phase)"
+    },
+    "grid_standard": {
+      "std_1": "AU AS/NZS 4777.2:2015 (Australia)",
+      "std_2": "NZ AS/NZS 4777.2:2015 (New Zealand)",
+      "std_3": "CN NB/T 32004:2018 (China)",
+      "std_4": "EN 50549-1:2019 (Europe / Global)",
+      "std_5": "NL EN 50549-1:2019 (Netherlands)",
+      "std_6": "UK G98-1 (United Kingdom)",
+      "std_7": "UK G99-1 (United Kingdom)",
+      "std_8": "DE VDE-AR-N 4105:2018 (Germany)",
+      "std_9": "BR ABNT NBR 16149:2013 (Brazil)",
+      "std_10": "Mexico (Mexico)",
+      "std_11": "CN GB/T 37408:2019 (China)",
+      "std_12": "EN 50549-2:2019 (Global)",
+      "std_13": "IEC 61727 (Global)",
+      "std_14": "PL EN 50549-1:2019 (Poland)",
+      "std_15": "VN IEC 61727:2004 (Vietnam)",
+      "std_16": "LK IEC 61727:2004 (Sri Lanka)",
+      "std_17": "IT CEI 0-21:2019 (Italy)",
+      "std_18": "MA IEC 61727:2004 (Morocco)",
+      "std_19": "AR IEC 61727:2004 (Argentina)",
+      "std_20": "IT CEI 0-21:2019 ARetti (Italy)",
+      "std_21": "Italy 03 (Italy)",
+      "std_22": "ZA NRS 097-2-1:2017 (South Africa)",
+      "std_23": "BE C10/11:2019 (Belgium)",
+      "std_24": "DK1 EN 50549-1:2019 (Denmark (Western))",
+      "std_25": "DK2 EN 50549-1:2019 (Denmark (Eastern))",
+      "std_26": "IE EN 50549-1:2019 (Ireland)",
+      "std_27": "CL IEC 61727:2004 (Chile)",
+      "std_28": "RO EN 50549-1:2019 (Romania)",
+      "std_29": "HU EN 50549-1:2019 (Hungary)",
+      "std_30": "UL 1741:2010 (North America)",
+      "std_31": "AU A AS/NZS 4777.2:2020 (Australia)",
+      "std_32": "AU B AS/NZS 4777.2:2020 (Australia)",
+      "std_33": "AU C AS/NZS 4777.2:2020 (Australia)",
+      "std_34": "NZ 20 AS/NZS 4777.2:2020 (New Zealand)",
+      "std_35": "IT CEI 0-16:2019 (Italy)",
+      "std_36": "ES UNE 206007-1:2013 (Spain)"
+    }
+  },
+  "faults": {
+    "1": {
+      "title": "MCU Fault"
+    },
+    "2": {
+      "title": "Current sensor fault"
+    },
+    "3": {
+      "title": "GFCI device fault"
+    },
+    "4": {
+      "title": "Relay fault"
+    },
+    "5": {
+      "title": "PV voltage high fault"
+    },
+    "6": {
+      "title": "ISO fault"
+    },
+    "7": {
+      "title": "GFCI fault"
+    },
+    "8": {
+      "title": "Temperature over fault"
+    },
+    "9": {
+      "title": "No utility fault"
+    },
+    "10": {
+      "title": "Grid voltage over fault"
+    },
+    "11": {
+      "title": "Grid frequency over fault"
+    },
+    "12": {
+      "title": "DCI over fault"
+    },
+    "13": {
+      "title": "EEPROM fault"
+    },
+    "14": {
+      "title": "Main and voice MCU communication fault"
+    },
+    "15": {
+      "title": "BUS voltage high fault"
+    },
+    "16": {
+      "title": "BUS voltage low fault"
+    },
+    "17": {
+      "title": "DRM S9 fault"
+    },
+    "18": {
+      "title": "DRM S0 fault"
+    },
+    "19": {
+      "title": "PE Connection missing"
+    },
+    "20": {
+      "title": "Bus voltage unbalance"
+    },
+    "21": {
+      "title": "BMS communication fail"
+    },
+    "22": {
+      "title": "CT is not connected"
+    },
+    "23": {
+      "title": "CT reverse connection"
+    },
+    "24": {
+      "title": "Battery is not connected"
+    },
+    "25": {
+      "title": "Backup load over voltage"
+    }
+  },
+  "warnings": {
+    "1": {
+      "title": "PV1 over current"
+    },
+    "2": {
+      "title": "PV2 over current"
+    },
+    "3": {
+      "title": "PV3 over current"
+    },
+    "4": {
+      "title": "PV4 over current"
+    },
+    "5": {
+      "title": "PV1 under voltage"
+    },
+    "6": {
+      "title": "PV2 under voltage"
+    },
+    "7": {
+      "title": "PV3 under voltage"
+    },
+    "8": {
+      "title": "PV4 under voltage"
+    },
+    "9": {
+      "title": "BUS over voltage"
+    },
+    "10": {
+      "title": "BUS under voltage"
+    },
+    "11": {
+      "title": "INV over current"
+    },
+    "12": {
+      "title": "ISO"
+    },
+    "13": {
+      "title": "Grid peak over voltage"
+    },
+    "14": {
+      "title": "FW update"
+    },
+    "15": {
+      "title": "PE connection missing"
+    },
+    "16": {
+      "title": "Grid voltage consistency warning"
+    },
+    "17": {
+      "title": "Fan abnormal"
+    },
+    "18": {
+      "title": "Backup load overload warning"
+    },
+    "19": {
+      "title": "SPD failure warning"
+    }
+  }
+}
