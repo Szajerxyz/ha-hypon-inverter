@@ -1,4 +1,4 @@
-# Hypon Inverter – integracja Home Assistant (Modbus TCP)
+# Hypontech Inverter – integracja Home Assistant (Modbus TCP)
 
 Falownik on-grid Hypontech **HPT-10000** (oraz HPK/HPS/HPT wg protokołu Hypontech Modbus V1.5) jako urządzenie
 w Home Assistant, bez wpisów w `configuration.yaml`.
@@ -6,14 +6,14 @@ Komunikacja: falownik → RS485 → Waveshare (tryb **Modbus TCP ↔ RTU**) → 
 
 ## Instalacja przez HACS
 1. HACS → ⋮ → *Custom repositories* → adres `https://github.com/Szajerxyz/ha-hypon-inverter`, kategoria **Integration**.
-2. Pobierz „Hypon Inverter”, zrestartuj Home Assistant.
-3. *Ustawienia → Urządzenia i usługi → Dodaj integrację → Hypon Inverter*.
+2. Pobierz „Hypontech Inverter”, zrestartuj Home Assistant.
+3. *Ustawienia → Urządzenia i usługi → Dodaj integrację → Hypontech Inverter*.
 
 ## Instalacja ręczna
 Skopiuj `custom_components/hypon_inverter` do `/config/custom_components/`, zrestartuj HA, dodaj integrację.
 
 ## Konfiguracja
-Przy dodawaniu: nazwa (domyślnie „Falownik Hypon”), adres IP konwertera, port (502), ID urządzenia Modbus (slave, domyślnie 3)
+Przy dodawaniu: nazwa (domyślnie „Falownik Hypontech”), adres IP konwertera, port (502), ID urządzenia Modbus (slave, domyślnie 3)
 i interwał odczytu (domyślnie **10 s**). W *Konfiguruj* zmienisz interwał, czas oczekiwania na odpowiedź (3 s), liczbę ponowień (2)
 i czas odblokowania ustawień (10 min).
 
@@ -34,11 +34,13 @@ Encje są podzielone na urządzenia z numerami (nazwa wynika z nazwy wpisanej pr
 
 | Urządzenie | Zawartość |
 |---|---|
-| Falownik Hypon – 1. Informacje | model, SN, wersje, norma sieci, stan, czas pracy, usterki i ostrzeżenia, blokada, restart |
-| Falownik Hypon – 2. Sieć i wyjście | moc czynna/pozorna/bierna, PF, napięcia i prądy faz, napięcia międzyfazowe, częstotliwość |
-| Falownik Hypon – 3. PV | napięcie, prąd i moc PV1/PV2 (moc = napięcie × prąd), moc PV suma |
-| Falownik Hypon – 4. Energia | produkcja dziś i całkowita (do panelu Energia) |
-| Falownik Hypon – 5. Sterowanie mocą | tryb sterowania mocą czynną, zadana moc, limit mocy z licznikiem, typ licznika, start/stop |
+| Falownik Hypontech – 1. Informacje | model, SN, wersje, norma sieci, stan, czas pracy, usterki i ostrzeżenia, blokada, restart |
+| Falownik Hypontech – 2. Sieć i wyjście | moc czynna/pozorna/bierna, PF, napięcia i prądy faz, napięcia międzyfazowe, częstotliwość |
+| Falownik Hypontech – 3. PV | napięcie, prąd i moc PV1/PV2 (moc = napięcie × prąd), moc PV suma |
+| Falownik Hypontech – 4. Energia | produkcja dziś i całkowita (do panelu Energia) |
+| Falownik Hypontech – 5. Sterowanie mocą | tryb sterowania mocą czynną, zadana moc, limit mocy z licznikiem, typ licznika, start/stop |
+
+Nazwa integracji i domyślna nazwa urządzenia to „Hypontech”, natomiast **ID i nazwy encji** zachowują krótki prefiks `hypon_` / „Hypon” (np. „Hypon PV moc suma”), a domena integracji to `hypon_inverter`.
 
 ID encji mają format `<domena>.hypon_<nazwa_angielska>`, np. `sensor.hypon_pv_total_power`,
 `sensor.hypon_pv_generation_total` – niezależnie od języka Home Assistant.
@@ -68,7 +70,7 @@ Restart = Stop → 10 s → Start (rozpiska nie ma osobnego polecenia restartu).
 Zapis: funkcja 06 (jeden rejestr), a gdy falownik jej nie obsługuje – funkcja 16.
 
 ## Blokada ustawień (bez kodu)
-Falownik Hypon nie ma hasła ustawień. Zapisy wykonywane przez **użytkowników** (dashboard, aplikacja, ręcznie uruchamiane skrypty)
+Falownik Hypontech nie ma hasła ustawień. Zapisy wykonywane przez **użytkowników** (dashboard, aplikacja, ręcznie uruchamiane skrypty)
 są odrzucane, dopóki ustawienia nie zostaną odblokowane w encji `lock.hypon_settings_lock` („Blokada ustawień”) – dotknij jej
 i wybierz *Odblokuj*. Po upływie czasu odblokowania (domyślnie 10 min) ustawienia blokują się same; po restarcie HA są zawsze
 zablokowane. Zapisy z **automatyzacji** (bez użytkownika) nie są blokowane.

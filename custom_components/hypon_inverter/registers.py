@@ -1,4 +1,4 @@
-"""Mapa rejestrów falownika Hypon HPT-10000 (wg HYPONTECH Modbus Protocol V1.5).
+"""Mapa rejestrów falownika Hypontech HPT-10000 (wg HYPONTECH Modbus Protocol V1.5).
 
 Adresy dziesiętnie, tak jak w dokumentacji Hypontech (30100 = 0x7594). Wszystkie rejestry czytane
 funkcją 03 (holding). Wartości 32-bitowe: starsze słowo pod niższym adresem (potwierdzone na liczniku

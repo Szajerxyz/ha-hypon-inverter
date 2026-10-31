@@ -1,4 +1,4 @@
-"""Stałe integracji Hypon Inverter."""
+"""Stałe integracji Hypontech Inverter."""
 
 DOMAIN = "hypon_inverter"
 ENTITY_PREFIX = "hypon"  # entity_id = <domena>.hypon_<id z names/en.json>
@@ -9,7 +9,7 @@ CONF_TIMEOUT = "timeout"
 CONF_RETRIES = "retries"
 CONF_LOCK_MINUTES = "lock_minutes"
 
-DEFAULT_NAME = "Falownik Hypon"
+DEFAULT_NAME = "Falownik Hypontech"
 DEFAULT_PORT = 502
 DEFAULT_SLAVE = 3
 DEFAULT_SCAN_INTERVAL = 10  # sekundy (magistrala wspólna z SRNE)

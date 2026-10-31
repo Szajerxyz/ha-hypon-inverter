@@ -11,7 +11,7 @@ from .registers import combine
 
 
 def device_name(entry, group: str, names) -> str:
-    """Nazwa urządzenia: "<nazwa> – <numer>. <opis grupy>", np. "Falownik Hypon – 1. Informacje"."""
+    """Nazwa urządzenia: "<nazwa> – <numer>. <opis grupy>", np. "Falownik Hypontech – 1. Informacje"."""
     label = names.group(group, GROUP_LABELS[group])
     return f"{entry.title} – {GROUP_NUMBER[group]}. {label}"
 

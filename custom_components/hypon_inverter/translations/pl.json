@@ -2,7 +2,7 @@
   "config": {
     "step": {
       "user": {
-        "title": "Falownik Hypon",
+        "title": "Falownik Hypontech",
         "description": "Podaj adres konwertera RS485 na Ethernet (Waveshare w trybie Modbus TCP <-> RTU).",
         "data": {
           "name": "Nazwa falownika",

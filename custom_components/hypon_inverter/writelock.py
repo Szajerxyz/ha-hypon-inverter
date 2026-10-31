@@ -1,6 +1,6 @@
 """Blokada zapisu ustawień - czysta logika (bez zależności od Home Assistant).
 
-Falownik Hypon nie ma hasła ustawień, więc odblokowanie nie wymaga kodu: chroni przed
+Falownik Hypontech nie ma hasła ustawień, więc odblokowanie nie wymaga kodu: chroni przed
 przypadkową zmianą z dashboardu. Po upływie czasu ustawienia blokują się same.
 """
 from __future__ import annotations

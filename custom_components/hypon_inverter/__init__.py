@@ -1,4 +1,4 @@
-"""Integracja Hypon Inverter (Modbus TCP przez konwerter RS485)."""
+"""Integracja Hypontech Inverter (Modbus TCP przez konwerter RS485)."""
 from __future__ import annotations
 
 import voluptuous as vol
