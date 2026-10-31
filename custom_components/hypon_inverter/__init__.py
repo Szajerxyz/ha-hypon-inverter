@@ -25,6 +25,7 @@ from .const import (
 )
 from .coordinator import HyponCoordinator
 from .entity import device_name
+from .groups import GROUP_ORDER
 from .names import Names
 from .registers import BINARY_SENSORS, BUTTONS, LOCKS, NUMBERS, SELECTS, SENSORS, SWITCHES
 
@@ -132,14 +133,27 @@ async def async_setup_entry(hass: HomeAssistant, entry: HyponConfigEntry) -> boo
                 config_entry=entry,
                 disabled_by=er.RegistryEntryDisabler.INTEGRATION if disabled else None,
             )
-    # główne urządzenie musi istnieć przed podurządzeniami (via_device)
-    dr.async_get(hass).async_get_or_create(
+    # urządzenia: główne ("1. Informacje") i grupy podłączone do niego (via_device_id)
+    dev_reg = dr.async_get(hass)
+    main = dev_reg.async_get_or_create(
         config_entry_id=entry.entry_id,
         identifiers={(DOMAIN, entry.entry_id)},
         name=device_name(entry, "info", coordinator.names),
         manufacturer=MANUFACTURER,
         model=MODEL,
     )
+    for group in GROUP_ORDER[1:]:
+        kwargs = dict(
+            config_entry_id=entry.entry_id,
+            identifiers={(DOMAIN, f"{entry.entry_id}_{group}")},
+            name=device_name(entry, group, coordinator.names),
+            manufacturer=MANUFACTURER,
+            model=MODEL,
+        )
+        try:
+            dev_reg.async_get_or_create(**kwargs, via_device_id=main.id)
+        except TypeError:  # starsze HA bez via_device_id
+            dev_reg.async_get_or_create(**kwargs, via_device=(DOMAIN, entry.entry_id))
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(_reload_on_update))
     return True

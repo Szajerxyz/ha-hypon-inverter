@@ -26,12 +26,12 @@ def device_info_for(entry, key: str, names) -> DeviceInfo:
             manufacturer=MANUFACTURER,
             model=MODEL,
         )
+    # powiązanie z głównym urządzeniem (via_device_id) ustawia __init__.py przy starcie
     return DeviceInfo(
         identifiers={(DOMAIN, f"{entry.entry_id}_{group}")},
         name=device_name(entry, group, names),
         manufacturer=MANUFACTURER,
         model=MODEL,
-        via_device=(DOMAIN, entry.entry_id),
     )
 
 

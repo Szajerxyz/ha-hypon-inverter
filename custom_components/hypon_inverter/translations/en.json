@@ -13,7 +13,7 @@
         },
         "data_description": {
           "slave": "Inverter address on the RS485 bus (set in the inverter menu, 1-16).",
-          "scan_interval": "Default 10 s. The bus is shared with the SRNE inverter - do not set a too short interval."
+          "scan_interval": "Default 10 s. If another integration uses the same converter, do not set a shorter interval."
         }
       },
       "no_response": {
@@ -35,12 +35,14 @@
           "scan_interval": "Polling interval (s)",
           "timeout": "Response timeout (s)",
           "retries": "Retries",
-          "lock_minutes": "Unlock time (minutes)"
+          "lock_minutes": "Unlock time (minutes)",
+          "tolerance": "Tolerance (cycles without response)"
         },
         "data_description": {
-          "timeout": "Per request (default 3 s).",
-          "retries": "How many times to repeat an unanswered request (default 2). At night the integration sends only one request per minute without retries.",
-          "lock_minutes": "After this time the settings lock again (default 10)."
+          "timeout": "Per request (default 5 s). With several connections (e.g. another integration) the Waveshare converter may hold a response for 2-5 s.",
+          "retries": "How many times to repeat an unanswered request (default 1). At night the integration sends only one request per minute without retries.",
+          "lock_minutes": "After this time the settings lock again (default 10).",
+          "tolerance": "After how many consecutive cycles without response the inverter is considered off (night). Until then entities keep their last values. Default 3."
         }
       }
     }

@@ -16,11 +16,12 @@ from .client import HyponClient, HyponConnectionError, HyponDeviceError, HyponEr
 from .const import (
     CONF_LOCK_MINUTES,
     CONF_SCAN_INTERVAL,
+    CONF_TOLERANCE,
     DEFAULT_LOCK_MINUTES,
     DEFAULT_SCAN_INTERVAL,
+    DEFAULT_TOLERANCE,
     DOMAIN,
     INFO_EVERY,
-    OFFLINE_AFTER,
     OFFLINE_INTERVAL,
     RESTART_DELAY,
     SLOW_EVERY,
@@ -63,6 +64,8 @@ class HyponCoordinator(DataUpdateCoordinator[dict[int, int]]):
         self.client = client
         self.names = None  # ustawiane w async_setup_entry (obiekt Names)
         self.write_lock = WriteLock(entry.options.get(CONF_LOCK_MINUTES, DEFAULT_LOCK_MINUTES))
+        # ile kolejnych cykli bez odpowiedzi, zanim uznamy, że falownik śpi (noc)
+        self.tolerance = max(1, int(entry.options.get(CONF_TOLERANCE, DEFAULT_TOLERANCE)))
         self._relock_unsub = None
         self.offline = False
         self.last_online: datetime | None = None
@@ -98,9 +101,11 @@ class HyponCoordinator(DataUpdateCoordinator[dict[int, int]]):
                 continue
             data[addr] = regs[0]
 
-    def _set_offline(self) -> None:
+    async def _set_offline(self) -> None:
         if not self.offline:
             _LOGGER.info("Falownik nie odpowiada (brak zasilania z PV?) - tryb czuwania")
+            # jednorazowo świeże połączenie na czas czuwania (gdyby gniazdo było martwe)
+            await self.client.close()
         self.offline = True
         self.update_interval = timedelta(seconds=OFFLINE_INTERVAL)
 
@@ -137,10 +142,10 @@ class HyponCoordinator(DataUpdateCoordinator[dict[int, int]]):
             raise UpdateFailed(f"Brak połączenia z konwerterem: {err}") from err
         except HyponNoResponse as err:
             self._fails += 1
-            if self._fails >= OFFLINE_AFTER or not data:
-                self._set_offline()
+            if self._fails >= self.tolerance or not data:
+                await self._set_offline()
             else:
-                _LOGGER.debug("Falownik nie odpowiedział (%s/%s): %s", self._fails, OFFLINE_AFTER, err)
+                _LOGGER.debug("Falownik nie odpowiedział (%s/%s): %s", self._fails, self.tolerance, err)
                 self._cycle -= 1  # powtórz ten sam zestaw bloków w następnym cyklu
             return data
         self._fails = 0

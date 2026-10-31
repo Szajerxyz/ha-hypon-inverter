@@ -240,6 +240,18 @@
     "inverter_run": {
       "id": "inverter_run",
       "name": "Inverter run (start/stop)"
+    },
+    "response_time": {
+      "id": "response_time",
+      "name": "Response time"
+    },
+    "read_errors": {
+      "id": "read_errors",
+      "name": "Read errors"
+    },
+    "reconnects": {
+      "id": "reconnects",
+      "name": "Reconnects"
     }
   },
   "options": {

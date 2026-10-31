@@ -28,7 +28,8 @@ class SensorDef:
     options: dict[int, str] | None = None  # sensor wyliczeniowy (klucze etykiet z names/*.json)
     strict: bool = True  # False = nieznane wartości jako "Nieznany (N)"
     # "ascii" (2 znaki na rejestr), "version" (U8 x 4 -> V a.b.c.d), "energy_total" (Float32 / U32),
-    # "fault_list" (kod usterki jako tekst), "fault_text" (opis + atrybut z listą)
+    # "fault_list" (kod usterki jako tekst), "fault_text" (opis + atrybut z listą),
+    # "stat" (statystyka komunikacji z klienta, bez rejestru)
     kind: str | None = None
     table: str | None = None  # "faults" / "warnings" dla kind fault_*
     alt_address: int | None = None  # energy_total: adres Float32
@@ -209,7 +210,17 @@ SENSORS: tuple[SensorDef, ...] = (
               diagnostic=True, icon="mdi:trending-up"),
     SensorDef("power_decrease_rate", "Szybkość spadku mocy", 40409, 0.1, "%Pn/min", None, None, 1,
               diagnostic=True, icon="mdi:trending-down"),
+    # --- Diagnostyka komunikacji (statystyki klienta od uruchomienia integracji, nie rejestry) ---
+    SensorDef("response_time", "Czas odpowiedzi", 0, 1, "ms", "duration", "measurement", 0,
+              kind="stat", enabled_default=False, diagnostic=True, icon="mdi:timer-outline"),
+    SensorDef("read_errors", "Błędy odczytu", 0, state_class="total_increasing", precision=0,
+              kind="stat", enabled_default=False, diagnostic=True, icon="mdi:alert-circle-outline"),
+    SensorDef("reconnects", "Ponowne połączenia", 0, state_class="total_increasing", precision=0,
+              kind="stat", enabled_default=False, diagnostic=True, icon="mdi:lan-connect"),
 )
+
+# sensor diagnostyczny -> atrybut klienta
+STATS = {"response_time": "last_response_ms", "read_errors": "read_errors", "reconnects": "reconnects"}
 
 BINARY_SENSORS: tuple[BinarySensorDef, ...] = (
     BinarySensorDef("fault_active", "Usterka falownika", 30117),
@@ -252,6 +263,8 @@ def _span(addr: int, words: int = 1) -> set[int]:
 
 ALL_ADDRESSES: set[int] = set()
 for _s in SENSORS:
+    if _s.kind == "stat":
+        continue
     ALL_ADDRESSES |= _span(_s.address, _s.words)
     if _s.alt_address:
         ALL_ADDRESSES |= _span(_s.alt_address, 2)

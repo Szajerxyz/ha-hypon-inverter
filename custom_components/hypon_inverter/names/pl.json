@@ -68,7 +68,10 @@
     "fixed_active_power": "Zadana moc czynna",
     "meter_limit_power": "Limit mocy z licznikiem",
     "meter_type": "Typ licznika",
-    "inverter_run": "Praca falownika (start/stop)"
+    "inverter_run": "Praca falownika (start/stop)",
+    "response_time": "Czas odpowiedzi",
+    "read_errors": "Błędy odczytu",
+    "reconnects": "Ponowne połączenia"
   },
   "options": {
     "machine_state": {

@@ -13,7 +13,7 @@
         },
         "data_description": {
           "slave": "Adres falownika na magistrali RS485 (ustawiany w menu falownika, 1-16).",
-          "scan_interval": "Domyślnie 10 s. Magistrala jest wspólna z falownikiem SRNE - nie ustawiaj zbyt krótkiego interwału."
+          "scan_interval": "Domyślnie 10 s. Gdy na tym samym konwerterze pracuje inna integracja, nie ustawiaj krótszego interwału."
         }
       },
       "no_response": {
@@ -35,12 +35,14 @@
           "scan_interval": "Interwał odczytu (s)",
           "timeout": "Czas oczekiwania na odpowiedź (s)",
           "retries": "Liczba ponowień",
-          "lock_minutes": "Czas odblokowania (minuty)"
+          "lock_minutes": "Czas odblokowania (minuty)",
+          "tolerance": "Tolerancja (cykle bez odpowiedzi)"
         },
         "data_description": {
-          "timeout": "Na jedno zapytanie (domyślnie 3 s).",
-          "retries": "Ile razy powtórzyć zapytanie bez odpowiedzi (domyślnie 2). W nocy integracja i tak wysyła tylko jedno zapytanie na minutę, bez ponowień.",
-          "lock_minutes": "Po tym czasie ustawienia blokują się ponownie (domyślnie 10)."
+          "timeout": "Na jedno zapytanie (domyślnie 5 s). Konwerter Waveshare przy kilku połączeniach (np. druga integracja) potrafi przetrzymać odpowiedź 2-5 s.",
+          "retries": "Ile razy powtórzyć zapytanie bez odpowiedzi (domyślnie 1). W nocy integracja wysyła tylko jedno zapytanie na minutę, bez ponowień.",
+          "lock_minutes": "Po tym czasie ustawienia blokują się ponownie (domyślnie 10).",
+          "tolerance": "Po ilu kolejnych cyklach bez odpowiedzi falownik zostaje uznany za wyłączony (noc). Do tego czasu encje zachowują ostatnie wartości. Domyślnie 3."
         }
       }
     }

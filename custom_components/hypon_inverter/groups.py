@@ -27,7 +27,7 @@ _SETS: dict[str, set[str]] = {
         "machine_state", "operating_substate", "waiting_time", "operating_hours_total",
         "fault_codes", "fault_description", "fault_active",
         "warning_codes", "warning_description", "warning_active",
-        "restart", "settings_lock",
+        "restart", "settings_lock", "response_time", "read_errors", "reconnects",
     },
     "grid": {
         "output_active_power", "output_apparent_power", "output_reactive_power",

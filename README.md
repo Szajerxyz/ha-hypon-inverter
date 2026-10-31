@@ -14,14 +14,15 @@ Skopiuj `custom_components/hypon_inverter` do `/config/custom_components/`, zres
 
 ## Konfiguracja
 Przy dodawaniu: nazwa (domyślnie „Falownik Hypontech”), adres IP konwertera, port (502), ID urządzenia Modbus (slave, domyślnie 3)
-i interwał odczytu (domyślnie **10 s**). W *Konfiguruj* zmienisz interwał, czas oczekiwania na odpowiedź (3 s), liczbę ponowień (2)
-i czas odblokowania ustawień (10 min).
+i interwał odczytu (domyślnie **10 s**). W *Konfiguruj* zmienisz: interwał, czas oczekiwania na odpowiedź (**5 s**),
+liczbę ponowień (**1**), tolerancję – po ilu kolejnych cyklach bez odpowiedzi falownik zostaje uznany za wyłączony (**3**) –
+oraz czas odblokowania ustawień (10 min).
 
 Falownik on-grid bez słońca **nie ma zasilania i nie odpowiada**. Jeśli dodajesz integrację w nocy, kreator zapyta, czy dodać ją mimo to.
 
 ## Noc (tryb czuwania)
-Po 3 kolejnych cyklach bez odpowiedzi integracja przechodzi w tryb czuwania: wysyła **jedno** zapytanie na minutę, bez ponowień,
-żeby nie blokować magistrali współdzielonej z SRNE. W tym czasie:
+Po 3 kolejnych cyklach bez odpowiedzi (opcja *tolerancja*) integracja przechodzi w tryb czuwania: wysyła **jedno** zapytanie na minutę, bez ponowień,
+żeby nie blokować magistrali współdzielonej z innymi urządzeniami. W tym czasie:
 - stan falownika = „Wyłączony (brak PV)”, moce i prądy = 0, napięcia i częstotliwość sieci = brak wartości,
 - liczniki (produkcja całkowita, czas pracy) zachowują ostatnią wartość, także po restarcie HA,
 - „Dzisiejsza produkcja” zachowuje wartość do północy, potem pokazuje 0,
@@ -75,14 +76,28 @@ są odrzucane, dopóki ustawienia nie zostaną odblokowane w encji `lock.hypon_s
 i wybierz *Odblokuj*. Po upływie czasu odblokowania (domyślnie 10 min) ustawienia blokują się same; po restarcie HA są zawsze
 zablokowane. Zapisy z **automatyzacji** (bez użytkownika) nie są blokowane.
 
-## Wspólna magistrala z SRNE
-Falownik pracuje na tej samej magistrali RS485 co SRNE (ten sam konwerter Waveshare, inny adres slave).
-- W konwerterze musi być włączona obsługa wielu połączeń/zapytań (bez niej encje znikały).
-- Integracja czyta blokami (pomiary: 1 zapytanie na cykl, ustawienia i liczniki co 6 cykli, dane urządzenia co godzinę),
-  robi przerwę 0,1 s po każdym zapytaniu i trzyma jedno zapytanie naraz (blokada asyncio).
-- Gdy pojawiają się braki odczytów u SRNE lub Hypona: wydłuż interwał (np. 15 s) albo zmniejsz liczbę ponowień.
+## Wspólna magistrala (inny falownik / inna integracja na tym samym konwerterze)
+Integracja może pracować na jednej magistrali RS485 z innymi urządzeniami (np. falownik SRNE z własną integracją),
+które łączą się z tym samym konwerterem osobnym połączeniem TCP. Każde urządzenie musi mieć inny adres slave.
+- W konwerterze Waveshare włącz *Multi-host* (w trybie *Modbus TCP to RTU* jest zawsze włączony).
+- Konwerter przy kilku połączeniach TCP **rozsyła odpowiedzi do wszystkich klientów** i potrafi przetrzymać odpowiedź
+  o 2–5 s (zaobserwowane na RS485 TO ETH (B), firmware V1.452). Dlatego:
+  - domyślny czas oczekiwania to 5 s, a brak odpowiedzi **nie zrywa połączenia** (spóźniona odpowiedź trafia do właściwego
+    gniazda; połączenie jest odnawiane tylko przy błędzie łącza),
+  - cudze ramki są odrzucane (inny adres slave, inny numer transakcji lub inna liczba rejestrów),
+  - w logach drugiej integracji mogą pojawiać się komunikaty pymodbus `request ask for id=1 but got id=3, Skipping` –
+    to nieszkodliwe odrzucenie cudzej odpowiedzi.
+- Integracja czyta blokami (pomiary: 1 zapytanie na cykl, ustawienia i liczniki co 6 cykli, dane urządzenia co godzinę)
+  z przerwą 0,1 s po każdym zapytaniu i jednym zapytaniem naraz.
+- Nie ustawiaj zbyt krótkich interwałów: dla dwóch falowników sprawdzone jest 10 s w każdej z integracji.
+  Przy 5 s w drugiej integracji opóźnienia konwertera rosły powyżej 3 s.
+- Komunikaty pymodbus o odrzuconych ramkach wyciszysz w `configuration.yaml`:
+  `logger:` → `logs:` → `pymodbus: critical` (integracje i tak logują własne problemy).
 
 ## Diagnostyka
+Sensory diagnostyczne (domyślnie wyłączone, urządzenie „1. Informacje”): **Czas odpowiedzi** [ms] ostatniego zapytania,
+**Błędy odczytu** i **Ponowne połączenia** (liczone od uruchomienia integracji). Włącz je, gdy chcesz ocenić pracę magistrali.
+
 Akcja `hypon_inverter.read_registers` (Narzędzia deweloperskie → Akcje) odczytuje dowolny zakres rejestrów, np. start `30100`, count `41`.
 Logi szczegółowe: w `configuration.yaml` → `logger: logs: custom_components.hypon_inverter: debug`.
 

@@ -19,6 +19,7 @@ from .const import (
     CONF_SCAN_INTERVAL,
     CONF_SLAVE,
     CONF_TIMEOUT,
+    CONF_TOLERANCE,
     DEFAULT_LOCK_MINUTES,
     DEFAULT_NAME,
     DEFAULT_PORT,
@@ -26,6 +27,7 @@ from .const import (
     DEFAULT_SCAN_INTERVAL,
     DEFAULT_SLAVE,
     DEFAULT_TIMEOUT,
+    DEFAULT_TOLERANCE,
     DOMAIN,
 )
 from .registers import REG_STATE
@@ -113,11 +115,14 @@ class HyponOptionsFlow(OptionsFlow):
                         CONF_SCAN_INTERVAL, default=get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
                     ): _box(2, 300, "s"),
                     vol.Required(CONF_TIMEOUT, default=get(CONF_TIMEOUT, DEFAULT_TIMEOUT)): _box(
-                        1, 10, "s"
+                        1, 15, "s"
                     ),
                     vol.Required(CONF_RETRIES, default=get(CONF_RETRIES, DEFAULT_RETRIES)): _box(
                         0, 5
                     ),
+                    vol.Required(
+                        CONF_TOLERANCE, default=get(CONF_TOLERANCE, DEFAULT_TOLERANCE)
+                    ): _box(1, 30),
                     vol.Required(
                         CONF_LOCK_MINUTES, default=get(CONF_LOCK_MINUTES, DEFAULT_LOCK_MINUTES)
                     ): _box(1, 1440, "min"),

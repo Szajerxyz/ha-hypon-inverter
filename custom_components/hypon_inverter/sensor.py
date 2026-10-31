@@ -20,6 +20,7 @@ from .faults import TABLES
 from .registers import (
     OFFLINE_STATE,
     SENSORS,
+    STATS,
     SensorDef,
     active_code,
     combine,
@@ -76,6 +77,8 @@ class HyponSensor(HyponEntity, RestoreSensor):
 
     @property
     def available(self) -> bool:
+        if self._d.kind == "stat":
+            return True
         if not self.coordinator.last_update_success:
             return False
         return self.coordinator.offline or self._raw is not None
@@ -99,6 +102,8 @@ class HyponSensor(HyponEntity, RestoreSensor):
 
     def _value(self):
         d, data, off = self._d, self._data, self.coordinator.offline
+        if d.kind == "stat":
+            return getattr(self.coordinator.client, STATS[d.key], None)
         if d.kind == "state":
             return self._names.option(d.key, OFFLINE_STATE) if off else self._option(data.get(d.address))
         if d.kind in ("fault_list", "fault_text"):
