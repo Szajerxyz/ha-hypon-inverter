@@ -101,7 +101,9 @@ class HyponClient:
         async with self._lock:
             await self._ensure_connected()
 
-    async def _call(self, func, label: str, retries: int | None, expect: int | None, *args, **kwargs):
+    async def _call(
+        self, func, label: str, retries: int | None, expect: int | None, *args, count_errors: bool = True, **kwargs
+    ):
         """Wywołanie z ponowieniami. Zwraca odpowiedź pymodbus (bez błędu)."""
         attempts = (self._retries if retries is None else max(0, retries)) + 1
         last = "brak odpowiedzi"
@@ -135,16 +137,20 @@ class HyponClient:
                         await asyncio.sleep(REQUEST_GAP)
                         raise HyponDeviceError(f"{label}: wyjątek Modbus {code}", code)
                     last = f"bramka: falownik nie odpowiada (kod {code})" if code else str(rr)
-            self.read_errors += 1
+            if count_errors:
+                self.read_errors += 1
             _LOGGER.debug("%s: próba %s/%s nieudana (%s)", label, attempt + 1, attempts, last)
             await asyncio.sleep(REQUEST_GAP)
         raise HyponNoResponse(f"{label}: {last}")
 
-    async def read(self, start: int, count: int, retries: int | None = None) -> list[int]:
+    async def read(
+        self, start: int, count: int, retries: int | None = None, count_errors: bool = True
+    ) -> list[int]:
+        """count_errors=False: brak odpowiedzi nie jest liczony jako błąd (zapytanie testowe w nocy)."""
         async with self._lock:
             rr = await self._call(
                 self._client.read_holding_registers, f"Odczyt {start}+{count}", retries, count,
-                start, count=count,
+                start, count=count, count_errors=count_errors,
             )
             return list(rr.registers)
 

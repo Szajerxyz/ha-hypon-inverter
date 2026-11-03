@@ -122,7 +122,7 @@ class HyponCoordinator(DataUpdateCoordinator[dict[int, int]]):
         try:
             if self.offline:
                 try:
-                    await self.client.read(REG_STATE, 1, retries=0)
+                    await self.client.read(REG_STATE, 1, retries=0, count_errors=False)
                 except HyponNoResponse:
                     return data
                 except HyponDeviceError:

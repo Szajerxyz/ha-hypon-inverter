@@ -96,7 +96,8 @@ które łączą się z tym samym konwerterem osobnym połączeniem TCP. Każde u
 
 ## Diagnostyka
 Sensory diagnostyczne (domyślnie wyłączone, urządzenie „1. Informacje”): **Czas odpowiedzi** [ms] ostatniego zapytania,
-**Błędy odczytu** i **Ponowne połączenia** (liczone od uruchomienia integracji). Włącz je, gdy chcesz ocenić pracę magistrali.
+**Błędy odczytu** i **Ponowne połączenia** (liczone od uruchomienia integracji). Zapytania testowe w trybie nocnym
+(falownik wyłączony) nie są liczone jako błędy. Włącz je, gdy chcesz ocenić pracę magistrali.
 
 Akcja `hypon_inverter.read_registers` (Narzędzia deweloperskie → Akcje) odczytuje dowolny zakres rejestrów, np. start `30100`, count `41`.
 Logi szczegółowe: w `configuration.yaml` → `logger: logs: custom_components.hypon_inverter: debug`.
