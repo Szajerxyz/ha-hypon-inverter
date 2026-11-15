@@ -150,10 +150,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: HyponConfigEntry) -> boo
             manufacturer=MANUFACTURER,
             model=MODEL,
         )
-        try:
-            dev_reg.async_get_or_create(**kwargs, via_device_id=main.id)
-        except TypeError:  # starsze HA bez via_device_id
-            dev_reg.async_get_or_create(**kwargs, via_device=(DOMAIN, entry.entry_id))
+        device = dev_reg.async_get_or_create(**kwargs)
+        if device.via_device_id != main.id:
+            dev_reg.async_update_device(device.id, via_device_id=main.id)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(entry.add_update_listener(_reload_on_update))
     return True

@@ -1,6 +1,5 @@
 {
   "_comment": "Entity names (reference language). 'id' = English entity_id suffix (entity_id = <domain>.hypon_<id>). To translate: copy this file to <language-code>.json (e.g. de.json), keep the keys, translate only the values; 'id' is only needed in en.json. Language = Home Assistant system language; fallback = en.",
-  "prefix": "Hypon",
   "groups": {
     "info": "Information",
     "grid": "Grid and output",

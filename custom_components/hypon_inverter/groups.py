@@ -1,7 +1,7 @@
 """Podział encji na urządzenia (grupy) w Home Assistant.
 
 Główne urządzenie ("Informacje") zawiera dane o falowniku. Pozostałe grupy to osobne
-urządzenia podłączone do głównego (via_device). Kolejność i nazwy zmienisz tutaj.
+urządzenia podłączone do głównego (via_device_id, ustawiane w __init__.py). Kolejność i nazwy zmienisz tutaj.
 """
 from __future__ import annotations
 

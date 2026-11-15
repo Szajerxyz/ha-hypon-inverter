@@ -36,8 +36,9 @@ def device_info_for(entry, key: str, names) -> DeviceInfo:
 
 
 class HyponEntity(CoordinatorEntity[HyponCoordinator]):
-    # Pełne nazwy z prefiksem "Hypon" (jak w SRNE), bez nazwy urządzenia
-    _attr_has_entity_name = False
+    # Nazwa encji bez prefiksu (np. "Dzisiejsza produkcja"); Home Assistant wyświetla
+    # "<nazwa urządzenia> <nazwa encji>". ID encji nie zależą od nazw (rejestrowane w __init__.py).
+    _attr_has_entity_name = True
 
     def __init__(
         self, coordinator: HyponCoordinator, key: str, name: str, address: int, words: int = 1

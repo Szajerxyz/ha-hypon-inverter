@@ -39,7 +39,6 @@ class Names:
                 if lang:
                     break
         self._lang = lang
-        self.prefix: str = lang.get("prefix", self._en.get("prefix", ""))
 
     @classmethod
     async def async_load(cls, hass: HomeAssistant) -> "Names":
@@ -62,7 +61,7 @@ class Names:
             or self._text(self._en.get("entities", {}).get(key))
             or fallback
         )
-        return f"{self.prefix} {text}".strip()
+        return text
 
     def option(self, entity_key: str, option_key: str) -> str:
         return (

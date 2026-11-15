@@ -41,7 +41,13 @@ Encje są podzielone na urządzenia z numerami (nazwa wynika z nazwy wpisanej pr
 | Falownik Hypontech – 4. Energia | produkcja dziś i całkowita (do panelu Energia) |
 | Falownik Hypontech – 5. Sterowanie mocą | tryb sterowania mocą czynną, zadana moc, limit mocy z licznikiem, typ licznika, start/stop |
 
-Nazwa integracji i domyślna nazwa urządzenia to „Hypontech”, natomiast **ID i nazwy encji** zachowują krótki prefiks `hypon_` / „Hypon” (np. „Hypon PV moc suma”), a domena integracji to `hypon_inverter`.
+Nazwa integracji i domyślna nazwa urządzenia to „Hypontech”. Domena integracji to `hypon_inverter`, a **ID encji** zachowują
+krótki prefiks `hypon_`.
+
+**Nazwy encji** nie mają prefiksu (np. „Dzisiejsza produkcja”, „PV1 moc”). Home Assistant wyświetla je razem z nazwą urządzenia,
+np. „Falownik Hypontech – 4. Energia Dzisiejsza produkcja”. Na kartach dashboardu, gdzie urządzenie jest oczywiste, HA zwykle
+pokazuje samą nazwę encji. Po zmianie nazwy urządzenia (wpisu integracji lub urządzenia) zmieniają się też wyświetlane nazwy encji,
+ale ID encji zostają bez zmian.
 
 ID encji mają format `<domena>.hypon_<nazwa_angielska>`, np. `sensor.hypon_pv_total_power`,
 `sensor.hypon_pv_generation_total` – niezależnie od języka Home Assistant.
